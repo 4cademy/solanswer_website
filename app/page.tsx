@@ -6,6 +6,15 @@ interface Conversation {
     answer: string;
 }
 
+interface ApiResponse {
+    answer: {
+        role: string;
+        parts: {
+            text: string;
+        }[];
+    };
+}
+
 export default function Home() {
     const [question, setQuestion] = useState('');
     const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -26,10 +35,10 @@ export default function Home() {
                 })
             });
 
-            const data = await res.text();
+            const data: ApiResponse = await res.json();
             setConversations(prev => [...prev, {
                 question: question,
-                answer: data
+                answer: data.answer.parts[0].text
             }]);
             setQuestion('');
         } catch (error) {
