@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface Conversation {
     question: string;
@@ -63,8 +64,8 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="flex w-full pr-[88px]">
-                            <div className="p-4 rounded-lg border border-solid border-black/[.08] dark:border-white/[.145] w-full">
-                                <pre className="whitespace-pre-wrap">{conv.answer}</pre>
+                            <div className="p-4 rounded-lg border border-solid border-black/[.08] dark:border-white/[.145] w-full prose dark:prose-invert max-w-none">
+                                <ReactMarkdown>{conv.answer}</ReactMarkdown>
                             </div>
                         </div>
                     </div>
