@@ -23,7 +23,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
         if (!question.trim()) return;
 
         setIsLoading(true);
@@ -88,7 +88,7 @@ export default function Home() {
                         placeholder="Enter your question..."
                     />
                     <button
-                        type="submit" // Ensure the button submits the form
+                        type="submit"
                         disabled={isLoading}
                         className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#00FFA3] text-[#121212] gap-2 hover:bg-[#00E09B] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
                     >
@@ -96,6 +96,15 @@ export default function Home() {
                     </button>
                 </form>
             </main>
+            {/* Logo positioned at the bottom right corner */}
+            <div className="fixed bottom-4 right-4">
+                <Image
+                    src="/jetsetters.png"
+                    width={200} // Adjust size as needed
+                    height={200} // Adjust size as needed
+                    alt="Logo"
+                />
+            </div>
         </div>
     );
 }
