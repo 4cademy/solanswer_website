@@ -22,7 +22,8 @@ export default function Home() {
     const [conversations, setConversations] = useState<Conversation[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior
         if (!question.trim()) return;
 
         setIsLoading(true);
@@ -55,9 +56,7 @@ export default function Home() {
     };
 
     return (
-        <div
-            className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#1A1A1A] text-white">
-
+        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[#1A1A1A] text-white">
             <Image
                 src="/solanswer.png"
                 width={500}
@@ -68,21 +67,19 @@ export default function Home() {
                 {conversations.map((conv, index) => (
                     <div key={index} className="w-full space-y-4">
                         <div className="flex justify-end">
-                            <div
-                                className="p-4 rounded-lg border border-solid border-[#9945FF] bg-[#121212] max-w-[80%]">
+                            <div className="p-4 rounded-lg border border-solid border-[#9945FF] bg-[#121212] max-w-[80%]">
                                 <p className="font-medium">{conv.question}</p>
                             </div>
                         </div>
                         <div className="flex w-full pr-[88px]">
-                            <div
-                                className="p-4 rounded-lg border border-solid border-[#14F195] w-full prose dark:prose-invert max-w-none bg-[#121212]">
+                            <div className="p-4 rounded-lg border border-solid border-[#14F195] w-full prose dark:prose-invert max-w-none bg-[#121212]">
                                 <ReactMarkdown>{conv.answer}</ReactMarkdown>
                             </div>
                         </div>
                     </div>
                 ))}
 
-                <div className="flex gap-4 items-center flex-col sm:flex-row w-full">
+                <form onSubmit={handleSubmit} className="flex gap-4 items-center flex-col sm:flex-row w-full">
                     <input
                         type="text"
                         value={question}
@@ -91,13 +88,13 @@ export default function Home() {
                         placeholder="Enter your question..."
                     />
                     <button
-                        onClick={handleSubmit}
+                        type="submit" // Ensure the button submits the form
                         disabled={isLoading}
-                        className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#00FFA3] text-white gap-2 hover:bg-[#00E09B] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+                        className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#00FFA3] text-[#121212] gap-2 hover:bg-[#00E09B] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
                     >
                         {isLoading ? 'Loading...' : 'Ask'}
                     </button>
-                </div>
+                </form>
             </main>
         </div>
     );
