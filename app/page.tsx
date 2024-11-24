@@ -72,8 +72,12 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="flex w-full pr-[88px]">
-                            <div className="p-4 rounded-lg border border-solid border-[#14F195] w-full prose dark:prose-invert max-w-none bg-[#121212]">
-                                <ReactMarkdown>{conv.answer}</ReactMarkdown>
+                            <div className="p-4 rounded-lg border border-solid border-[#14F195] w-full max-w-none bg-[#121212]">
+                                <ReactMarkdown
+                                    className="markdown-text" // Custom class for Markdown content
+                                >
+                                    {conv.answer}
+                                </ReactMarkdown>
                             </div>
                         </div>
                     </div>
@@ -105,6 +109,55 @@ export default function Home() {
                     alt="Logo"
                 />
             </div>
+
+            <style jsx global>{`
+                /* Ensure consistent styling of Markdown elements */
+                .markdown-text {
+                    color: white; /* Text color */
+                    background-color: #121212; /* Background color */
+                    line-height: 1.6; /* Better readability */
+                }
+
+                /* For headers (H1, H2, etc.) */
+                .markdown-text h1, .markdown-text h2, .markdown-text h3, .markdown-text h4, .markdown-text h5, .markdown-text h6 {
+                    color: #00FFA3; /* Customize header color */
+                    margin-bottom: 0.5rem;
+                }
+
+                /* For lists */
+                .markdown-text ul, .markdown-text ol {
+                    margin-left: 1.5rem;
+                    list-style-position: inside;
+                }
+
+                .markdown-text li {
+                    margin-bottom: 0.5rem;
+                }
+
+                /* For links */
+                .markdown-text a {
+                    color: #00FFA3;
+                    text-decoration: none;
+                    border-bottom: 1px solid #00FFA3;
+                }
+
+                .markdown-text a:hover {
+                    text-decoration: underline;
+                }
+
+                /* For code blocks */
+                .markdown-text pre, .markdown-text code {
+                    background-color: #2B2B2B;
+                    color: #f1f1f1;
+                    border-radius: 4px;
+                    padding: 0.2rem 0.4rem;
+                }
+
+                .markdown-text pre {
+                    padding: 1rem;
+                    overflow-x: auto;
+                }
+            `}</style>
         </div>
     );
 }
